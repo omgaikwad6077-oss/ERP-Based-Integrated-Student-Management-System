@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Nexus Academy</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #FFD166;
+            --dark: #0B0B2B;
+            --light: #F8F9FA;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn {
+            border-radius: var(--radius);
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-outline-primary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-nav .nav-link {
+            margin: 0 15px;
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.8), rgba(255, 101, 132, 0.8)), url('https://images.unsplash.com/photo-1577174805365-032b3d9f9ed5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 200px 0 100px;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 11, 43, 0.8);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .faculty-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .faculty-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .faculty-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .faculty-card:hover .faculty-img img {
+            transform: scale(1.05);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--primary);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 150px 0 80px;
+            }
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/40x40" alt="Nexus Academy Logo" class="me-2">
+                    <span style="font-weight: 700; color: var(--primary);">NEXUS</span> Academy
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admissions.html">Admissions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-primary" href="login.html">Portal</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About <span style="color: var(--accent);">Nexus</span> Academy</h1>
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 style="font-weight: 700; margin-bottom: 20px;">Innovating Education<br>for the <span style="color: var(--primary);">Digital Age</span></h2>
+                    <p class="text-muted">Founded in 2010, Nexus Academy was born from a simple idea: education should evolve with technology. What started as a small tutorial center has grown into India's most technologically advanced educational institution, serving over 5,000 students annually.</p>
+                    <p class="text-muted">Our mission is to bridge the gap between traditional education and the skills needed for the 21st century. We believe in learning that's interactive, personalized, and relevant to the real world.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="btn btn-primary">Our Vision</a>
+                        <a href="#" class="btn btn-outline-primary">Virtual Tour</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1577174805365-032b3d9f9ed5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Campus" class="img-fluid rounded-3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">By the <span style="color: var(--primary);">Numbers</span></h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">5000+</div>
+                        <h5>Students Enrolled</h5>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">200+</div>
+                        <h5>Faculty Members</h5>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">98%</div>
+                        <h5>Placement Rate</h5>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <h5>Global Partners</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Meet Our <span style="color: var(--primary);">Leaders</span></h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="faculty-card">
+                        <div class="faculty-img">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dr. Ananya Gupta">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h5>Dr. Ananya Gupta</h5>
+                            <p class="text-muted">Founder & Chancellor</p>
+                            <p class="text-muted small">Ph.D. in Educational Technology from Stanford</p>
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+                                <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="text-primary"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="faculty-card">
+                        <div class="faculty-img">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Prof. Rajiv Malhotra">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h5>Prof. Rajiv Malhotra</h5>
+                            <p class="text-muted">Vice Chancellor</p>
+                            <p class="text-muted small">M.Tech from IIT Bombay</p>
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+                                <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="text-primary"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="faculty-card">
+                        <div class="faculty-img">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dr. Priya Kapoor">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h5>Dr. Priya Kapoor</h5>
+                            <p class="text-muted">Dean of Technology</p>
+                            <p class="text-muted small">Ph.D. in Computer Science</p>
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+                                <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="text-primary"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="faculty-card">
+                        <div class="faculty-img">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Prof. Arjun Mehta">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h5>Prof. Arjun Mehta</h5>
+                            <p class="text-muted">Dean of Student Affairs</p>
+                            <p class="text-muted small">MBA from Harvard</p>
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+                                <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="text-primary"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Our <span style="color: var(--primary);">Journey</span></h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>2010</h5>
+                        <p>Nexus Academy founded as a tutorial center in Bangalore with 20 students.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>2012</h5>
+                        <p>Launched first online course platform with 100+ video lectures.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>2015</h5>
+                        <p>Opened first full-fledged campus with smart classrooms and VR labs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>2018</h5>
+                        <p>Partnered with MIT for curriculum development and faculty exchange.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>2020</h5>
+                        <p>Introduced AI-powered personalized learning paths for all students.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>2023</h5>
+                        <p>Launched India's first fully hybrid degree programs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>2025</h5>
+                        <p>Expanded to 5 campuses across India with 5,000+ students.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">Be Part of Our Story</h2>
+            <p class="text-white-50 mb-4">Join us as we continue to redefine education for the next generation.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="admissions.html" class="btn btn-light">Apply Now</a>
+                <a href="contact.html" class="btn btn-outline-light">Visit Campus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4">Nexus Academy</h4>
+                    <p>Innovating education for the 21st century. Where technology enhances human potential.</p>
+                    <div class="footer-social mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">Home</a></li>
+                        <li><a href="about.html" class="text-white-50">About</a></li>
+                        <li><a href="admissions.html" class="text-white-50">Admissions</a></li>
+                        <li><a href="contact.html" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Programs</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Undergraduate</a></li>
+                        <li><a href="#" class="text-white-50">Postgraduate</a></li>
+                        <li><a href="#" class="text-white-50">Diploma</a></li>
+                        <li><a href="#" class="text-white-50">Online Courses</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact</h5>
+                    <p class="text-white-50"><i class="fas fa-map-marker-alt me-2"></i> Tech Park, Bangalore 560100</p>
+                    <p class="text-white-50"><i class="fas fa-phone me-2"></i> +91 80 1234 5678</p>
+                    <p class="text-white-50"><i class="fas fa-envelope me-2"></i> hello@nexus.ac.in</p>
+                </div>
+            </div>
+            <hr class="bg-white-50 my-4">
+            <p class="text-center text-white-50 mb-0">&copy; 2025 Nexus Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animate on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.stat-card, .faculty-card, .timeline-content');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Initialize
+        document.querySelectorAll('.stat-card, .faculty-card, .timeline-content').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
+        });
+    </script>
+</body>
+</html>

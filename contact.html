@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Nexus Academy</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #FFD166;
+            --dark: #0B0B2B;
+            --light: #F8F9FA;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn {
+            border-radius: var(--radius);
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-outline-primary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-nav .nav-link {
+            margin: 0 15px;
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.8), rgba(255, 101, 132, 0.8)), url('https://images.unsplash.com/photo-1523241731227-838d6558d9d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 200px 0 100px;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 11, 43, 0.8);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Contact Cards */
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.2);
+        }
+
+        /* Form */
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-control {
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25);
+        }
+
+        /* Map */
+        .map-container {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        /* Office Hours */
+        .office-hours {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 20px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(108, 99, 255, 0.1)" points="0,0 100,0 100,100"/></svg>');
+            background-size: cover;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-social a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 150px 0 80px;
+            }
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/40x40" alt="Nexus Academy Logo" class="me-2">
+                    <span style="font-weight: 700; color: var(--primary);">NEXUS</span> Academy
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admissions.html">Admissions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-primary" href="login.html">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Get In <span style="color: var(--accent);">Touch</span></h1>
+            <p class="lead" style="animation: fadeInUp 1.2s ease;">We're here to help and answer any question you might have</p>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Our <span style="color: var(--primary);">Campuses</span></h2>
+                <p class="text-muted">Visit us or connect with our admissions team</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4>Bangalore Campus</h4>
+                        <p class="text-muted">Tech Park, Outer Ring Road, Bangalore 560100</p>
+                        <div class="mt-3">
+                            <p class="mb-1"><i class="fas fa-phone me-2"></i> +91 80 1234 5678</p>
+                            <p class="mb-1"><i class="fas fa-envelope me-2"></i> bangalore@nexus.ac.in</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-2">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4>Delhi Campus</h4>
+                        <p class="text-muted">Education City, Sector 62, Noida, Delhi NCR 201301</p>
+                        <div class="mt-3">
+                            <p class="mb-1"><i class="fas fa-phone me-2"></i> +91 120 1234 5678</p>
+                            <p class="mb-1"><i class="fas fa-envelope me-2"></i> delhi@nexus.ac.in</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-2">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4>Hyderabad Campus</h4>
+                        <p class="text-muted">Knowledge City, Gachibowli, Hyderabad 500032</p>
+                        <div class="mt-3">
+                            <p class="mb-1"><i class="fas fa-phone me-2"></i> +91 40 1234 5678</p>
+                            <p class="mb-1"><i class="fas fa-envelope me-2"></i> hyderabad@nexus.ac.in</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-2">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Form -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="map-container ratio ratio-16x9">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.331470415023!2d77.60449171482171!3d12.930529790868448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15d7877b6f8d%3A0x5d6f4f9e9f8f8f8f!2sBangalore%20Tech%20Park!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <h3 class="mb-4">Send Us a Message</h3>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" placeholder="Phone Number">
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select">
+                                    <option selected>I want to ask about...</option>
+                                    <option>Admissions</option>
+                                    <option>Courses</option>
+                                    <option>Scholarships</option>
+                                    <option>Campus Visit</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Hours -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="office-hours">
+                        <h3 class="mb-4">Office Hours</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Admissions Office</h5>
+                                <p class="mb-1"><strong>Monday-Friday:</strong> 9:00 AM - 6:00 PM</p>
+                                <p class="mb-1"><strong>Saturday:</strong> 10:00 AM - 4:00 PM</p>
+                                <p class="mb-0"><strong>Sunday:</strong> Closed</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Academic Office</h5>
+                                <p class="mb-1"><strong>Monday-Friday:</strong> 8:30 AM - 5:30 PM</p>
+                                <p class="mb-1"><strong>Saturday:</strong> 9:00 AM - 1:00 PM</p>
+                                <p class="mb-0"><strong>Sunday:</strong> Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="office-hours">
+                        <h3 class="mb-4">Emergency Contacts</h3>
+                        <p class="mb-1"><i class="fas fa-phone me-2"></i> <strong>Security:</strong> +91 80 9876 5432 (24/7)</p>
+                        <p class="mb-1"><i class="fas fa-phone me-2"></i> <strong>Hostel Warden:</strong> +91 80 8765 4321</p>
+                        <p class="mb-0"><i class="fas fa-phone me-2"></i> <strong>Medical:</strong> +91 80 7654 3210</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Connect With <span style="color: var(--primary);">Us</span></h2>
+                <p class="text-muted">Follow us on social media for the latest updates</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="contact-card" style="width: 150px; height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <i class="fab fa-facebook-f fa-3x mb-2" style="color: #3b5998;"></i>
+                    <h5>Facebook</h5>
+                </a>
+                <a href="#" class="contact-card" style="width: 150px; height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <i class="fab fa-instagram fa-3x mb-2" style="color: #E1306C;"></i>
+                    <h5>Instagram</h5>
+                </a>
+                <a href="#" class="contact-card" style="width: 150px; height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <i class="fab fa-linkedin-in fa-3x mb-2" style="color: #0077B5;"></i>
+                    <h5>LinkedIn</h5>
+                </a>
+                <a href="#" class="contact-card" style="width: 150px; height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <i class="fab fa-youtube fa-3x mb-2" style="color: #FF0000;"></i>
+                    <h5>YouTube</h5>
+                </a>
+                <a href="#" class="contact-card" style="width: 150px; height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <i class="fab fa-twitter fa-3x mb-2" style="color: #1DA1F2;"></i>
+                    <h5>Twitter</h5>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center;">
+        <div class="container">
+            <h2 class="text-white mb-4">Still Have Questions?</h2>
+            <p class="text-white-50 mb-4">Our admissions counselors are available to help you with any queries</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="tel:+918012345678" class="btn btn-light"><i class="fas fa-phone me-2"></i> Call Now</a>
+                <a href="admissions.html" class="btn btn-outline-light">Start Application</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4">Nexus Academy</h4>
+                    <p>Innovating education for the 21st century. Where technology enhances human potential.</p>
+                    <div class="footer-social mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">Home</a></li>
+                        <li><a href="about.html" class="text-white-50">About</a></li>
+                        <li><a href="admissions.html" class="text-white-50">Admissions</a></li>
+                        <li><a href="contact.html" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Programs</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Undergraduate</a></li>
+                        <li><a href="#" class="text-white-50">Postgraduate</a></li>
+                        <li><a href="#" class="text-white-50">Diploma</a></li>
+                        <li><a href="#" class="text-white-50">Online Courses</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact</h5>
+                    <p class="text-white-50"><i class="fas fa-map-marker-alt me-2"></i> Tech Park, Bangalore 560100</p>
+                    <p class="text-white-50"><i class="fas fa-phone me-2"></i> +91 80 1234 5678</p>
+                    <p class="text-white-50"><i class="fas fa-envelope me-2"></i> contact@nexus.ac.in</p>
+                </div>
+            </div>
+            <hr class="bg-white-50 my-4">
+            <p class="text-center text-white-50 mb-0">&copy; 2025 Nexus Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animate on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.contact-card, .contact-form, .office-hours');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Initialize
+        document.querySelectorAll('.contact-card, .contact-form, .office-hours').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions | Nexus Academy</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #FFD166;
+            --dark: #0B0B2B;
+            --light: #F8F9FA;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn {
+            border-radius: var(--radius);
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-outline-primary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-nav .nav-link {
+            margin: 0 15px;
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.8), rgba(255, 101, 132, 0.8)), url('https://images.unsplash.com/photo-1523241731227-838d6558d9d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 200px 0 100px;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 11, 43, 0.8);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Process Steps */
+        .process-step {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+
+        .process-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .process-step:hover .process-icon {
+            transform: scale(1.2);
+        }
+
+        /* Course Cards */
+        .course-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .course-card:hover .course-img img {
+            transform: scale(1.05);
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: rgba(108, 99, 255, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 20px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(108, 99, 255, 0.1)" points="0,0 100,0 100,100"/></svg>');
+            background-size: cover;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-social a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 150px 0 80px;
+            }
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/40x40" alt="Nexus Academy Logo" class="me-2">
+                    <span style="font-weight: 700; color: var(--primary);">NEXUS</span> Academy
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="admissions.html">Admissions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-primary" href="login.html">Portal</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Admissions <span style="color: var(--accent);">2025</span></h1>
+            <p class="lead" style="animation: fadeInUp 1.2s ease;">Join India's most innovative learning community</p>
+        </div>
+    </section>
+
+    <!-- Admission Process -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Simple <span style="color: var(--primary);">3-Step</span> Process</h2>
+                <p class="text-muted">We've made our admission process straightforward and student-friendly</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="process-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>Step 1: Apply Online</h4>
+                        <p>Fill out our online application form with your details and upload the required documents. Our admissions team will review your application within 48 hours.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="process-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4>Step 2: Entrance Assessment</h4>
+                        <p>Take our online entrance assessment to help us understand your strengths and learning style. This helps us create your personalized learning path.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="process-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h4>Step 3: Secure Your Seat</h4>
+                        <p>Once accepted, complete your registration and pay the admission fee to secure your place in our next batch.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary btn-lg">Start Your Application</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Our <span style="color: var(--primary);">Flagship</span> Programs</h2>
+                <p class="text-muted">Explore our most popular courses</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1523241731227-838d6558d9d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="B.Tech Computer Science">
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary">4 Years</span>
+                                <span class="text-muted">₹1,20,000/year</span>
+                            </div>
+                            <h4>B.Tech Computer Science (AI/ML)</h4>
+                            <p class="text-muted">Master artificial intelligence and machine learning with hands-on projects and industry collaborations.</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a href="#" class="btn btn-outline-primary btn-sm">Details</a>
+                                <a href="#" class="btn btn-primary btn-sm">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1523241731227-838d6558d9d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="B.Tech Robotics">
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary">4 Years</span>
+                                <span class="text-muted">₹1,30,000/year</span>
+                            </div>
+                            <h4>B.Tech Robotics & Automation</h4>
+                            <p class="text-muted">Build and program robots with access to our advanced robotics lab and VR simulation tools.</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a href="#" class="btn btn-outline-primary btn-sm">Details</a>
+                                <a href="#" class="btn btn-primary btn-sm">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1523241731227-838d6558d9d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="BBA Digital Business">
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary">3 Years</span>
+                                <span class="text-muted">₹95,000/year</span>
+                            </div>
+                            <h4>BBA in Digital Business</h4>
+                            <p class="text-muted">Learn digital marketing, e-commerce, and business analytics with real-world case studies.</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a href="#" class="btn btn-outline-primary btn-sm">Details</a>
+                                <a href="#" class="btn btn-primary btn-sm">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eligibility & Requirements -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="process-step">
+                        <h4 class="mb-4">Eligibility Criteria</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> 10+2 with minimum 50% marks</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> Physics, Chemistry, Math for engineering courses</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> Any stream for business programs</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> Entrance exam score (if applicable)</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary mt-3">Check Detailed Requirements</a>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="process-step">
+                        <h4 class="mb-4">Required Documents</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-file-alt me-2 text-primary"></i> 10th and 12th mark sheets</li>
+                            <li class="mb-2"><i class="fas fa-file-alt me-2 text-primary"></i> Transfer certificate</li>
+                            <li class="mb-2"><i class="fas fa-file-alt me-2 text-primary"></i> Passport size photographs</li>
+                            <li class="mb-2"><i class="fas fa-file-alt me-2 text-primary"></i> ID proof (Aadhar/Passport)</li>
+                            <li class="mb-2"><i class="fas fa-file-alt me-2 text-primary"></i> Entrance exam scorecard</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary mt-3">Download Checklist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scholarships -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Scholarships & <span style="color: var(--primary);">Financial Aid</span></h2>
+                <p class="text-muted">We believe finances shouldn't be a barrier to quality education</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="process-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4>Merit Scholarships</h4>
+                        <p>Up to 100% tuition fee waiver for top performers in our entrance assessment.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="process-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h4>Need-Based Aid</h4>
+                        <p>Financial assistance for students from economically disadvantaged backgrounds.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="process-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4>Sports/Arts Scholarships</h4>
+                        <p>Special scholarships for outstanding achievements in sports or performing arts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">Explore Scholarships</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-weight: 700;">Frequently Asked <span style="color: var(--primary);">Questions</span></h2>
+            </div>
+            <div class="accordion" id="faqAccordion">
+                <div class="faq-item">
+                    <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        <h5>What is the application deadline for 2025 admissions?</h5>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div id="faq1" class="collapse show" data-bs-parent="#faqAccordion">
+                        <div class="faq-answer">
+                            <p>The application deadline for most programs is July 31, 2025. However, we have rolling admissions for some courses. We recommend applying as early as possible as seats are limited.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        <h5>Is there an entrance exam for all programs?</h5>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div id="faq2" class="collapse" data-bs-parent="#faqAccordion">
+                        <div class="faq-answer">
+                            <p>Most of our technical programs require an entrance assessment, but our business and arts programs have a different evaluation process. Check the specific program page for details.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        <h5>Can I apply for multiple programs?</h5>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div id="faq3" class="collapse" data-bs-parent="#faqAccordion">
+                        <div class="faq-answer">
+                            <p>Yes, you can apply for up to 3 programs with a single application fee. You'll need to indicate your order of preference during the application process.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq4">
+                        <h5>What makes Nexus Academy different from other colleges?</h5>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div id="faq4" class="collapse" data-bs-parent="#faqAccordion">
+                        <div class="faq-answer">
+                            <p>Nexus Academy offers AI-powered personalized learning, VR labs, global exposure programs, and a strong focus on industry-relevant skills that set us apart from traditional colleges.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">Ready to Take the First Step?</h2>
+            <p class="text-white-50 mb-4">Our admissions team is here to guide you through the process</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" class="btn btn-light">Start Application</a>
+                <a href="contact.html" class="btn btn-outline-light">Talk to Counselor</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4">Nexus Academy</h4>
+                    <p>Innovating education for the 21st century. Where technology enhances human potential.</p>
+                    <div class="footer-social mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">Home</a></li>
+                        <li><a href="about.html" class="text-white-50">About</a></li>
+                        <li><a href="admissions.html" class="text-white-50">Admissions</a></li>
+                        <li><a href="contact.html" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Programs</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Undergraduate</a></li>
+                        <li><a href="#" class="text-white-50">Postgraduate</a></li>
+                        <li><a href="#" class="text-white-50">Diploma</a></li>
+                        <li><a href="#" class="text-white-50">Online Courses</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact</h5>
+                    <p class="text-white-50"><i class="fas fa-map-marker-alt me-2"></i> Tech Park, Bangalore 560100</p>
+                    <p class="text-white-50"><i class="fas fa-phone me-2"></i> +91 80 1234 5678</p>
+                    <p class="text-white-50"><i class="fas fa-envelope me-2"></i> admissions@nexus.ac.in</p>
+                </div>
+            </div>
+            <hr class="bg-white-50 my-4">
+            <p class="text-center text-white-50 mb-0">&copy; 2025 Nexus Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const icon = question.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+
+        // Animate on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.process-step, .course-card, .faq-item');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Initialize
+        document.querySelectorAll('.process-step, .course-card, .faq-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
+        });
+    </script>
+</body>
+</html>
